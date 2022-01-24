@@ -1,0 +1,139 @@
+button {
+    text-transform: uppercase;
+    font-weight: 600;
+    outline: none;
+    border: none;
+}    
+
+.buttonText {
+    padding: 8px 16px;
+    border-radius: 4px;
+}
+
+.buttonIcon {
+    border-radius: 50px;
+}
+
+
+.default.contained {
+    background-color: rgba(0, 0, 0, .54);
+    box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
+    color: white;
+}
+
+.default.contained:hover {
+    background-color: #1565c0;
+}
+
+:is(.default.none, .default.outlined) {
+    color: rgba(0, 0, 0, .54);
+    background-color: transparent;
+}
+
+:is(.default.none, .default.outlined):hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    transition: all ease 500ms;
+}
+
+.default.outlined {
+    border: 1px solid rgba(0, 0, 0, .54);
+}
+
+
+.primary.contained {
+    background-color: rgb(25, 118, 210);
+    box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
+    color: white;
+}
+
+.primary.contained:hover {
+    background-color: #1565c0;
+}
+
+:is(.primary.none, .primary.outlined) {
+    color: rgb(25, 118, 210);
+    background-color: transparent;
+}
+
+:is(.primary.none, .primary.outlined):hover {
+    background-color: rgba(25, 118, 210, 0.05);
+    transition: all ease 500ms;
+}
+
+.primary.outlined {
+    border: 1px solid rgb(25, 118, 210);
+}
+
+
+.secondary.contained {
+    background-color: rgb(156, 39, 176);
+    box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
+    color: white;
+}
+
+.secondary.contained:hover {
+    background-color: #7b1fa2;
+}
+
+:is(.secondary.none, .secondary.outlined) {
+    color: rgb(156, 39, 176);
+    background-color: transparent;
+}
+
+:is(.secondary.none, .secondary.outlined):hover {
+    background-color: rgba(156, 39, 176, 0.05);
+    transition: all ease 500ms;
+}
+
+.secondary.outlined {
+    border: 1px solid rgb(156, 39, 176);
+}
+
+.success.contained {
+    background-color: rgb(46, 125, 50);
+    box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
+    color: white;
+}
+
+.success.contained:hover {
+    background-color: #1b5e20;
+}
+
+:is(.success.none, .success.outlined) {
+    color: rgb(46, 125, 50);
+    background-color: transparent;
+}
+
+:is(.success.none, .success.outlined):hover {
+    background-color: rgba(46, 125, 50, 0.05);
+    transition: all ease 500ms;
+}
+
+.success.outlined {
+    border: 1px solid rgb(46, 125, 50);
+}
+
+.error.contained {
+    background-color: rgb(211, 47, 47);
+    box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
+    color: white;
+}
+
+.error.contained:hover {
+    background-color: #d32f2f;
+}
+
+:is(.error.none, .error.outlined) {
+    color: rgb(211, 47, 47);
+    background-color: transparent;
+}
+
+:is(.error.none, .error.outlined):hover {
+    background-color: rgba(211, 47, 47, 0.05);
+    transition: all ease 500ms;
+}
+
+.error.outlined {
+    border: 1px solid rgb(211, 47, 47);
+}
+

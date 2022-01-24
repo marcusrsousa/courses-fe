@@ -1,0 +1,10 @@
+.modal {
+    background-color: white;
+    border-radius: 8px;
+    padding: 24px
+}
+
+.alignRight {
+    display: flex;
+    justify-content: flex-end;
+}

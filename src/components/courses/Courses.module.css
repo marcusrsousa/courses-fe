@@ -1,0 +1,55 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 24px;
+}
+
+.table {
+    border-radius: 4px;
+    box-shadow: rgb(0 0 0 / 20%) 0px 2px 1px -1px, rgb(0 0 0 / 14%) 0px 1px 1px 0px, rgb(0 0 0 / 12%) 0px 1px 3px 0px;
+    width: 60vw;    
+}
+
+.row {
+    display: flex;
+    height: 5vh;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    padding-left: 8px;
+    align-items: center;
+}
+
+.row:nth-of-type(even) {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.row div {
+    width: 20vw;
+}
+
+.row div div {
+    width: 25px;
+    height: 24px;
+}
+
+.title {
+    border-radius: 4px 4px 0 0;
+    font-weight: 500;
+    background-color: rgba(0, 0, 0, 0.87);
+    color:white;
+    padding-left: 8px;
+}
+
+.alignRight {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 8px;
+}
+
+.paddingRight {
+    padding-right: 8px;
+}
+
+.link {
+    cursor: pointer;
+}
