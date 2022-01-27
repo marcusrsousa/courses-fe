@@ -2,10 +2,25 @@
   background-color: #282c34;
   height: 6vh;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding-left: 24px ;
-  font-size: calc(10px + 2vmin);
+  padding: 0 24px;
   color: white;
+  justify-content: space-between;
+  align-items: center;
+  font-size: calc(3px + 2vmin);
 }
 
+.App-header a {
+  width: 15vw;
+  font-size: calc(10px + 2vmin);
+}
+
+.link {
+  cursor: pointer;
+}
+
+.user-box {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 10vw;
+}

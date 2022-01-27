@@ -19,7 +19,7 @@ function DeleteModal(props) {
 	}
 
 	const onClose = () => {
-		props.onClose()
+		props.onClose && props.onClose()
 		close()
 	}
 

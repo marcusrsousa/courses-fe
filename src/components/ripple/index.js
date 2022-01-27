@@ -1,5 +1,5 @@
 import React from 'react'
-import { createRipples } from 'react-ripples'
+import Ripples from 'react-ripples'
 
 export default function MyRipple(props) {
 	const getColor = () => {
@@ -26,13 +26,9 @@ export default function MyRipple(props) {
 		return 'rgba(0, 0, 0, 0.1)'
 		
 	}
-	const CustomRipple = createRipples({
-		color: getColor(),
-		during: 1000,
-	})
 	return (
-		<CustomRipple>
+		<Ripples during={1000} color={getColor()}>
 			{props.children}
-		</CustomRipple>
+		</Ripples>
 	)
 }

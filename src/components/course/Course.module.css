@@ -1,11 +1,64 @@
 .container {
     padding: 24px;
+    width: 30vw;
 }
 
 .buttonArea {
-    width: 30vw;
     height: 7vh;
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
+}
+
+.chapter {
+    padding: 8px;
+    border: 1px solid rgba(0, 0, 0, .2);
+    box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
+    border-radius: 5px;
+    margin-top: 16px;
+    min-height: 36px;
+}
+
+.spaceBetween {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chapter input {
+    border: 1px solid black;
+}
+
+.arrowButton {
+    width: 36px;
+    cursor: pointer;
+}
+
+.labelInput {
+    height: 24px;
+}
+
+.rotate {
+    transform: rotate(90deg);
+}
+
+.line {
+    border: 1px solid rgba(0, 0, 0, .2);
+}
+
+h2, h3 {
+    line-height: 0;
+}
+
+.modal {
+    background-color: white;
+    border-radius: 8px;
+    padding: 24px
+}
+
+
+.alignRight {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 16px;
 }

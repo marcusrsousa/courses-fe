@@ -12,6 +12,21 @@ button {
 
 .buttonIcon {
     border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttonIcon.normal {
+    width: 24px;
+    height: 24px;
+    font-size: 16px;
+}
+
+.buttonIcon.large {
+    width: 36px;
+    height: 36px;
+    font-size: 24px;
 }
 
 

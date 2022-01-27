@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import api from '../../services/api'
 import style from './Courses.module.css'
-import { MdDelete, MdEdit } from 'react-icons/md'
+import { MdAdd, MdDelete, MdEdit } from 'react-icons/md'
 
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import DeleteModal from '../delete-modal'
 import { useSnackbar } from 'react-simple-snackbar'
 import Button from '../button'
@@ -40,7 +40,10 @@ function Courses() {
 
 	return (
 		<div className={style.container}>
-			<div className={style.table}>
+			<div className={`${style.fullSize} ${style.alignRight} ${style.paddingBottom}`}>
+				<Link to="/courses/new"><Button color="secondary" variant="contained" size="large"><MdAdd></MdAdd></Button></Link>
+			</div>
+			<div className={`${style.fullSize} ${style.table}`}>
 				<div className={`${style.row} ${style.title}`}>
 					<div>ID</div>
 					<div>Name</div>
