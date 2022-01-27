@@ -1,19 +1,18 @@
 import React from 'react'
 import jwt_decode from 'jwt-decode'
+import { MdLogout } from 'react-icons/md'
+import { Link, Route, Routes, useNavigate } from 'react-router-dom'
 
 import './App.css'
-import Courses from './components/courses'
-import { Routes, Route, Link, useNavigate } from 'react-router-dom'
 import Course from './components/course'
+import Courses from './components/courses'
 import PrivateRoute from './components/private-route'
-import { MdLogout } from 'react-icons/md'
 import MyRipple from './components/ripple'
 
- 
 
- 
 
-function App() {
+
+function App () {
 	const navigate = useNavigate()
 	const token = localStorage.getItem('Token')
 	const user = token && jwt_decode(token)

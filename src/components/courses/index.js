@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from 'react'
-import api from '../../services/api'
-import style from './Courses.module.css'
 import { MdAdd, MdDelete, MdEdit } from 'react-icons/md'
-
 import { Link, useNavigate } from 'react-router-dom'
-import DeleteModal from '../delete-modal'
 import { useSnackbar } from 'react-simple-snackbar'
-import Button from '../button'
-function Courses() {
-	const [courses, setCourses] = useState()
-	const [message, setMessage] = useState()
-	const [id, setId] = useState()
 
-	const [openSnackbar] = useSnackbar()
+import api from '../../services/api'
+import Button from '../button'
+import DeleteModal from '../delete-modal'
+import style from './Courses.module.css'
+
+
+function Courses () {
+	const [ courses, setCourses ] = useState()
+	const [ message, setMessage ] = useState()
+	const [ id, setId ] = useState()
+
+	const [ openSnackbar ] = useSnackbar()
 	const navigate = useNavigate()
 
 	const getCourses = () => api.get('/courses').then((res) => setCourses(res.data))

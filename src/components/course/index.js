@@ -1,26 +1,26 @@
 import React, { useEffect, useState } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useModal } from 'react-hooks-use-modal'
+import { MdAdd, MdArrowRight, MdCheck, MdDelete, MdEdit } from 'react-icons/md'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useSnackbar } from 'react-simple-snackbar'
 
+import api from '../../services/api'
+import Button from '../button'
 import { Input, useFocus } from '../input'
 import styles from './Course.module.css'
-import Button from '../button'
-import api from '../../services/api'
-import { MdAdd, MdArrowRight, MdCheck, MdDelete, MdEdit } from 'react-icons/md'
-import { useModal } from 'react-hooks-use-modal'
 
-function Course() {
+function Course () {
 	const { id } = useParams()
 	const navigate = useNavigate()
-	const [openSnackbar] = useSnackbar()
+	const [ openSnackbar ] = useSnackbar()
 
-	const[name, setName] = useState()
-	const[description, setDescription] = useState()
-	const[teacher, setTeacher] = useState()
-	const[chapters, setChapters] = useState()
+	const [ name, setName ] = useState()
+	const [ description, setDescription ] = useState()
+	const [ teacher, setTeacher ] = useState()
+	const [ chapters, setChapters ] = useState()
 
-	const[submitted, setSubmitted] = useState(false)
-	const[deletedChapters, setDeletedChapters] = useState([])
+	const [ submitted, setSubmitted ] = useState(false)
+	const [ deletedChapters, setDeletedChapters ] = useState([])
 
 
 	useEffect(async () => {
@@ -31,40 +31,40 @@ function Course() {
 			setTeacher(teacher)
 			setChapters(normalize(chapters))
 		}
-	},[id])
+	},[ id ])
 
 	const normalize = chapters => {
-		return chapters.map(chapter => ({ ...chapter, lessons: chapter.lessons.map(lesson => ({...lesson, videoLink: lesson.video_link}))}))
+		return chapters.map(chapter => ({ ...chapter, lessons: chapter.lessons.map(lesson => ({ ...lesson, videoLink: lesson.video_link })) }))
 	}
 
 	const desnormalize = lesson => {
-		return {...lesson, video_link: lesson.videoLink}
+		return { ...lesson, video_link: lesson.videoLink }
 	}
 
 	const saveChapters = async courseId => {
-		try{
+		try {
 			chapters.forEach(async chapter => {
-				if(chapter.id === 0) {
+				if (chapter.id === 0) {
 					const newChapter = await api.post(`/courses/${courseId}/chapters`, chapter)
-					chapter.lessons.forEach(async lesson => await api.post(`/chapters/${newChapter.data.id}/lessons`, desnormalize(lesson)) )	
+					chapter.lessons.forEach(async lesson => await api.post(`/chapters/${newChapter.data.id}/lessons`, desnormalize(lesson)))	
 					return
 				}
 				await api.put(`/chapters/${chapter.id}`, chapter)
 			
 				chapter.lessons.forEach(async lesson => {
-					if(lesson.id === 0) {
+					if (lesson.id === 0) {
 						await api.post(`/chapters/${chapter.id}/lessons`, desnormalize(lesson))
 						return
 					}
 					await api.put(`/lessons/${lesson.id}`, desnormalize(lesson))
 				})
 
-				if(chapter.deletedLessons) {
+				if (chapter.deletedLessons) {
 					chapter.deletedLessons.forEach(async lessonId => await api.delete(`/lessons/${lessonId}`))
 				}
 			})
-			deletedChapters.forEach(async chapterId => await api.delete(`/chapters/${chapterId}`) )
-		} catch(err) {
+			deletedChapters.forEach(async chapterId => await api.delete(`/chapters/${chapterId}`))
+		} catch (err) {
 			openSnackbar(`Error when saved: ${err.error}`)
 		}
 		
@@ -79,6 +79,7 @@ function Course() {
 		}
 
 		try {
+			
 			if (id) {
 				await api.put(`/courses/${id}`, { name, description, teacher })
 				saveChapters(id)
@@ -88,7 +89,7 @@ function Course() {
 			const course = await api.post('/courses', { name, description, teacher })
 			saveChapters(course.data.id)
 
-		} catch(err) {
+		} catch (err) {
 			openSnackbar(`Error when saved: ${err.error}`)
 		}
 	}
@@ -103,13 +104,13 @@ function Course() {
 	}
 
 	const deleteChapter = chapter => {
-		setChapters([...chapters.filter(c => c.id !== chapter.id)])
+		setChapters([ ...chapters.filter(c => c.id !== chapter.id) ])
 
-		if(!chapter.id) {
+		if (!chapter.id) {
 			return
 		}
 
-		setDeletedChapters([...deletedChapters, chapter.id])
+		setDeletedChapters([ ...deletedChapters, chapter.id ])
 	}
 	
 	return (
@@ -118,44 +119,44 @@ function Course() {
 			<Input label='Description' required submitted={submitted} value={description} onChange={description => setDescription(description)}></Input>
 			<Input label='Teacher' required submitted={submitted} value={teacher} onChange={teacher => setTeacher(teacher)}></Input>
 			<div>
-				<div className={styles.spaceBetween} ><h2>Chapters</h2> <Button color="secondary" size="large" onClick={() =>setChapters([...chapters, {id: 0, name: undefined}])}><MdAdd></MdAdd></Button> </div>
-				{chapters && chapters.map((chapter) => chapter && <Chapter key={`chapter-${chapter.id}`} chapter={chapter} onDelete={() => deleteChapter(chapter)} onChange={c => setChapters([...chapters.filter(ch => ch.id !== chapter.id), c])}></Chapter>)}
+				<div className={styles.spaceBetween} ><h2>Chapters</h2> <Button color="secondary" size="large" onClick={() =>setChapters([ ...chapters, { id: 0, name: undefined } ])}><MdAdd></MdAdd></Button> </div>
+				{chapters && chapters.map((chapter) => chapter && <Chapter key={`chapter-${chapter.id}`} chapter={chapter} onDelete={() => deleteChapter(chapter)} onChange={c => setChapters([ ...chapters.filter(ch => ch.id !== chapter.id), c ])}></Chapter>)}
 			</div>
 			<div className={styles.buttonArea}>
 				<Button onClick={close}>Cancel</Button>
 				<Button variant="contained" color="primary" onClick={save}>Save</Button>
 			</div>
-		</div>	)
+		</div>)
 }
 
-function Chapter(props) {
+function Chapter (props) {
 	const { chapter } = props
-	const [open, setOpen] = useState(false)
-	const [lessons, setLessons] = useState(chapter.lessons ? chapter.lessons : [])
-	const [lesson, setLesson] = useState()
+	const [ open, setOpen ] = useState(false)
+	const [ lessons, setLessons ] = useState(chapter.lessons ? chapter.lessons : [])
+	const [ lesson, setLesson ] = useState()
 
 	const saveLesson = lesson => {
-		const updatedLessons = [...lessons.filter(l => l.id !== lesson.id), lesson]
+		const updatedLessons = [ ...lessons.filter(l => l.id !== lesson.id), lesson ]
 		setLessons(updatedLessons)
 		props.onChange({ ...chapter, lessons: updatedLessons })
 	}
 
 	const deleteLesson = lesson => {
 		const newLessons = lessons.filter(l => l.id !== lesson.id)
-		if(newLessons.length === 0) {
+		if (newLessons.length === 0) {
 			setOpen(false)
 		}
 
-		setLessons([...newLessons])
+		setLessons([ ...newLessons ])
 
-		if(!lesson.id) {
+		if (!lesson.id) {
 			return
 		}
 
 		if (!chapter.deletedLessons) {
 			chapter.deletedLessons = []
 		}
-		chapter.deletedLessons = [...chapter.deletedLessons, lesson.id]
+		chapter.deletedLessons = [ ...chapter.deletedLessons, lesson.id ]
 		props.onChange(chapter)
 		
 	}
@@ -171,7 +172,7 @@ function Chapter(props) {
 				</div>
 				<div className={styles.spaceBetween}>
 					<Button><MdDelete onClick={() => props.onDelete(chapter)}></MdDelete></Button>
-					<Button onClick={() => setLesson({id: 0, name: undefined})}><MdAdd></MdAdd></Button>
+					<Button onClick={() => setLesson({ id: 0, name: undefined })}><MdAdd></MdAdd></Button>
 				</div>
 			</div>
 			{open && (
@@ -191,13 +192,13 @@ function Chapter(props) {
 	</div>)
 }
 
-function LabelInput(props) {
-	const [edit, setEdit] = useState(!props.value)
-	const [inputRef, setInputFocus] = useFocus()
-	const [inputValue, setInputValue] = useState(props.value)
+function LabelInput (props) {
+	const [ edit, setEdit ] = useState(!props.value)
+	const [ inputRef, setInputFocus ] = useFocus()
+	const [ inputValue, setInputValue ] = useState(props.value)
 	
 
-	useEffect(() => setInputFocus(), [edit])
+	useEffect(() => setInputFocus(), [ edit ])
 	
 	
 	const onChange = () => {
@@ -211,29 +212,29 @@ function LabelInput(props) {
 }
 
 
-function LessonModal(props) {
-	const [Modal, open, close] = useModal('root', {
+function LessonModal (props) {
+	const [ Modal, open, close ] = useModal('root', {
 		preventScroll: true,
 		closeOnOverlayClick: false
 	})
 
-	const[name, setName] = useState()
-	const[description, setDescription] = useState()
-	const[videoLink, setVideoLink] = useState()
-	const[submitted, setSubmitted] = useState()
+	const [ name, setName ] = useState()
+	const [ description, setDescription ] = useState()
+	const [ videoLink, setVideoLink ] = useState()
+	const [ submitted, setSubmitted ] = useState()
 
 
 	useEffect(() =>	{
-		if(props.lesson) {
-			const {name, description, videoLink} = props.lesson
+		if (props.lesson) {
+			const { name, description, videoLink } = props.lesson
 			setName(name)
 			setDescription(description)
 			setVideoLink(videoLink)
 			open()
-		} }, [props.lesson])
+		} }, [ props.lesson ])
 
 	const onSave = () => {
-		if(!name || !description || !videoLink) {
+		if (!name || !description || !videoLink) {
 			setSubmitted(true)
 			return
 		}
