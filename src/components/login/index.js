@@ -9,23 +9,23 @@ import { Input } from '../input'
 import style from './Login.module.css'
 
 
-function Login() {
-	const [Modal, open, close] = useModal('root', {
+function Login () {
+	const [ Modal, open, close ] = useModal('root', {
 		preventScroll: true,
 		closeOnOverlayClick: false
 	})
 
-	const [email, setEmail] = useState()
-	const [password, setPassword] = useState()
-	const [submitted, setSubmitted] = useState(false)
-	const [openSnackbar] = useSnackbar()
+	const [ email, setEmail ] = useState()
+	const [ password, setPassword ] = useState()
+	const [ submitted, setSubmitted ] = useState(false)
+	const [ openSnackbar ] = useSnackbar()
 	const navigate = useNavigate()
 
 	useEffect(() =>	open(), [])
 
 	const onLogin = () => {
 		setSubmitted(true)
-		if(!email || !password) {
+		if (!email || !password) {
 			return
 		}
 		
@@ -35,9 +35,9 @@ function Login() {
 			.then(res => res.data)
 			.then(({ token }) => {
 				localStorage.setItem('Token', token)
-				navigate('/')
+				navigate('/admin')
 				close()
-			}).catch( err => openSnackbar(`Error when login: ${err.response.status === 404 ? 'Email or Password are invalid' :err.message}`))	
+			}).catch(err => openSnackbar(`Error when login: ${err.response.status === 404 ? 'Email or Password are invalid' :err.message}`))	
 		
 	}
 

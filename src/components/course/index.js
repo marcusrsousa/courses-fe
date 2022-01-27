@@ -79,7 +79,7 @@ function Course () {
 		}
 
 		try {
-			
+
 			if (id) {
 				await api.put(`/courses/${id}`, { name, description, teacher })
 				saveChapters(id)
@@ -96,11 +96,11 @@ function Course () {
 
 	const showMessageAndClose = (message) => {
 		openSnackbar(message)
-		navigate('/')
+		navigate('/admin')
 	}
 
 	const close = () => {
-		navigate('/')
+		navigate('/admin')
 	}
 
 	const deleteChapter = chapter => {

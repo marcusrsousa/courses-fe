@@ -1,0 +1,40 @@
+.container {
+    padding: 24px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title {
+    padding-top: 24px;
+    text-align: center;
+    font-weight: 400;
+    font-size: 2vw;
+    color: rgb(25, 118, 210);
+}
+
+.description {
+    font-size: 1vw;
+    min-height: 30vh;
+    display: flex;
+    align-items: center;
+}
+
+.author {
+    text-align: right;
+    font-size: .7vw;
+    color: rgba(0, 0, 0, .48);
+}
+
+.chapters {
+    position: relative;
+    width: 100%;
+}
+
+.buttonArea {
+    width: 100%;  
+    display: flex;
+    justify-content: center;  
+    padding-top: 16px;
+}
