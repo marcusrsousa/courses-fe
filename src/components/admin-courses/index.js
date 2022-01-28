@@ -42,7 +42,7 @@ function AdminCourses () {
 	return (
 		<div className={style.container}>
 			<div className={`${style.fullSize} ${style.alignRight} ${style.paddingBottom}`}>
-				<Link to="/courses/new"><Button color="secondary" variant="contained" size="large"><MdAdd></MdAdd></Button></Link>
+				<Link to="/admin/courses/new"><Button color="secondary" variant="contained" size="large"><MdAdd></MdAdd></Button></Link>
 			</div>
 			<div className={`${style.fullSize} ${style.table}`}>
 				<div className={`${style.row} ${style.title}`}>
